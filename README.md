@@ -1,40 +1,37 @@
 # DS & Algo in Python
 
-##
+- Big O
 
-## Big O
+- Classes & Pointers
 
-## Classes & Pointers
+- LinkedLists
 
-## LinkedLists
+- Doubly LinkedLists
 
-## Doubly LinkedLists
+- Stacks & Queues
 
-## Stacks & Queues
+- Trees
 
-## Trees
+  - Binary Search Trees (BST)
 
-- Binary Search Trees (BST)
+- Hash Tables
 
-## Hash Tables
+- Graphs
 
-## Graphs
+- Recursion
 
-## Recursion
+- Recursive Binary Search Trees
 
-## Recursive Binary Search Trees
+- Basic Sorting Algo
 
-## Basic Sorting Algo
+  - Bubble Sort
+  - Selection Sort
+  - Insertion Sort
 
-- Bubble Sort
-- Selection Sort
-- Insertion Sort
+- Merge Sort
 
-## Merge Sort
+- Quick Sort
 
-## Quick Sort
-
-## Tree Traversal
-
-- Breadth First Search (BFS)
-- Depth First Search (DFS)
+- Tree Traversal
+  - Breadth First Search (BFS)
+  - Depth First Search (DFS)
