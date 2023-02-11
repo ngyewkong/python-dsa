@@ -69,6 +69,25 @@ class DoublyLinkedList:
         self.length -= 1
         return temp
 
+    # prepend - add a node at the beginning of Doubly LL
+    def prepend(self, value):
+        new_node = Node(value)
+        # case for Doubly LL to have 0 items before prepend
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        # normal cases
+        else:
+            # set the new node to point to the curr head
+            new_node.next = self.head
+            # set the curr head to point to the new node
+            self.head.prev = new_node
+            # shift the head to the new node
+            self.head = new_node
+        # increment length of Doubly LL
+        self.length += 1
+        return True
+
 
 my_doubly_linked_list = DoublyLinkedList(7)
 # my_doubly_linked_list.print_list()
@@ -88,3 +107,12 @@ print(my_doubly_linked_list.print_list())  # None
 # None is being popped
 print("{} is being popped".format(my_doubly_linked_list.pop()))
 print(my_doubly_linked_list.print_list())  # None
+
+# prepend
+# setting up Doubly LL with 2 items
+my_doubly_linked_list.append(2)
+my_doubly_linked_list.append(3)
+print(my_doubly_linked_list.print_list())  # 2 3 None
+# prepend 1
+my_doubly_linked_list.prepend(1)
+print(my_doubly_linked_list.print_list())  # 1 2 3 None
