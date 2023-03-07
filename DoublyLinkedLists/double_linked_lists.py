@@ -69,6 +69,49 @@ class DoublyLinkedList:
         self.length -= 1
         return temp
 
+    # prepend - add a node at the beginning of Doubly LL
+    def prepend(self, value):
+        new_node = Node(value)
+        # case for Doubly LL to have 0 items before prepend
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        # normal cases
+        else:
+            # set the new node to point to the curr head
+            new_node.next = self.head
+            # set the curr head to point to the new node
+            self.head.prev = new_node
+            # shift the head to the new node
+            self.head = new_node
+        # increment length of Doubly LL
+        self.length += 1
+        return True
+
+    # pop_first - remove the first node of Doubly LL
+    def pop_first(self):
+        # case for 0 items before pop_first
+        if self.length == 0:
+            return None
+        # case for 1 item before pop_first
+        # set temp to the curr head
+        temp = self.head
+        # set head and tail to None
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        # normal cases
+        else:
+            # shift the head to the next node
+            self.head = self.head.next
+            # set the next node prev to None (remove the pointer pointing back curr head)
+            self.head.prev = None
+            # remove the temp (Node that is being popped) by setting the temp.next to None
+            temp.next = None
+        # decrement length of Doubly LL
+        self.length -= 1
+        return temp
+
 
 my_doubly_linked_list = DoublyLinkedList(7)
 # my_doubly_linked_list.print_list()
@@ -88,3 +131,32 @@ print(my_doubly_linked_list.print_list())  # None
 # None is being popped
 print("{} is being popped".format(my_doubly_linked_list.pop()))
 print(my_doubly_linked_list.print_list())  # None
+
+# prepend
+# setting up Doubly LL with 2 items
+my_doubly_linked_list.append(2)
+my_doubly_linked_list.append(3)
+print(my_doubly_linked_list.print_list())  # 2 3 None
+# prepend 1
+my_doubly_linked_list.prepend(1)
+print(my_doubly_linked_list.print_list())  # 1 2 3 None
+
+# pop_first
+# setting up Doubly LL with 2 items
+my_doubly_linked_list_popfirst = DoublyLinkedList(2)
+my_doubly_linked_list_popfirst.append(1)
+print(my_doubly_linked_list_popfirst.print_list())  # 2 1 None
+
+# pop_first - 2 <-> 1 <-> None
+# 2 is being popped
+print("{} is being popped first".format(
+    my_doubly_linked_list_popfirst.pop_first().value))
+print(my_doubly_linked_list_popfirst.print_list())  # 1 None
+# 1 is being popped
+print("{} is being popped first".format(
+    my_doubly_linked_list_popfirst.pop_first().value))
+print(my_doubly_linked_list_popfirst.print_list())  # None
+# None is being popped
+print("{} is being popped first".format(
+    my_doubly_linked_list_popfirst.pop_first()))
+print(my_doubly_linked_list_popfirst.print_list())  # None
