@@ -112,15 +112,41 @@ class DoublyLinkedList:
         self.length -= 1
         return temp
 
+    # get method (very diff impl from singly linked list) - more optimised
+    def get(self, index):
+        # check for base case
+        # if index is less than zero or greater than the length of DLLs -> return None
+        if index < 0 or index >= self.length:
+            return None
+        # set temp var to the head for iteration
+        temp = self.head
+        # default for loop (similar to SLL impl)
+        # however we only want to iterate only if the index is the first half of the DLL
+        if index < self.length/2:
+            for _ in range(index):
+                # iterating through each node moving temp pointer forward
+                temp = temp.next
+        # the other condition if the index is in the second half (iterate from the back)
+        else:
+            # set temp to the tail
+            temp = self.tail
+            # range from the last index to the given index, iterate by decrement by 1 (if -1 not specified is by default increment by 1)
+            for _ in range(self.length - 1, index, -1):
+                temp = temp.prev
+        # this will return the node in which the index is
+        return temp
+
 
 my_doubly_linked_list = DoublyLinkedList(7)
 # my_doubly_linked_list.print_list()
 print(my_doubly_linked_list.print_list())  # 7 None
 
+print("-------------------------------------------")
 # append
 my_doubly_linked_list.append(2)
 print(my_doubly_linked_list.print_list())  # 7 2 None
 
+print("-------------------------------------------")
 # pop - 7 <-> 2 <-> None
 # 2 is being popped
 print("{} is being popped".format(my_doubly_linked_list.pop().value))
@@ -132,6 +158,7 @@ print(my_doubly_linked_list.print_list())  # None
 print("{} is being popped".format(my_doubly_linked_list.pop()))
 print(my_doubly_linked_list.print_list())  # None
 
+print("-------------------------------------------")
 # prepend
 # setting up Doubly LL with 2 items
 my_doubly_linked_list.append(2)
@@ -141,6 +168,7 @@ print(my_doubly_linked_list.print_list())  # 2 3 None
 my_doubly_linked_list.prepend(1)
 print(my_doubly_linked_list.print_list())  # 1 2 3 None
 
+print("-------------------------------------------")
 # pop_first
 # setting up Doubly LL with 2 items
 my_doubly_linked_list_popfirst = DoublyLinkedList(2)
@@ -160,3 +188,18 @@ print(my_doubly_linked_list_popfirst.print_list())  # None
 print("{} is being popped first".format(
     my_doubly_linked_list_popfirst.pop_first()))
 print(my_doubly_linked_list_popfirst.print_list())  # None
+
+print("-------------------------------------------")
+# get(index)
+# setup DLL with nodes 2, -3, 5, 1
+my_doubly_linked_list_get = DoublyLinkedList(2)
+my_doubly_linked_list_get.append(-3)
+my_doubly_linked_list_get.append(5)
+my_doubly_linked_list_get.append(1)
+print(my_doubly_linked_list_get.print_list())  # 2 -3 5 1 None
+print("The node at index 0 is {}".format(
+    my_doubly_linked_list_get.get(0).value))  # 2
+print("The node at index 2 is {}".format(
+    my_doubly_linked_list_get.get(2).value))  # 5
+
+print("-------------------------------------------")
