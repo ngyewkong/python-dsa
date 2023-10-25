@@ -138,20 +138,31 @@ class DoublyLinkedList:
 
     # set method (set_value as set is a python keyword)
     def set_value(self, index, value):
-        temp = self.head
-        # base case
-        if index < 0 or index >= self.length:
-            return None
-        # replace the value for first half
-        if index < self.length/2:
-            for _ in range(index):
-                temp = temp.next
-        else:
-            temp = self.tail
-            for _ in range(self.length - 1, index, -1):
-                temp = temp.prev
-        # set the value of the node at the required index with the value
-        temp.value = value
+        # temp = self.head
+        # # base case
+        # if index < 0 or index >= self.length:
+        #     return None
+        # # replace the value for first half
+        # if index < self.length/2:
+        #     for _ in range(index):
+        #         temp = temp.next
+        # else:
+        #     temp = self.tail
+        #     for _ in range(self.length - 1, index, -1):
+        #         temp = temp.prev
+        # # set the value of the node at the required index with the value
+        # temp.value = value
+
+        # more optimised version by using get method we wrote earlier
+        temp = self.get(index)
+
+        # check if temp return Node or None (out of index)
+        if temp:
+            # if temp is not None -> set the value to the input value
+            temp.value = value
+            return True
+        # return false when temp is None
+        return False
 
 
 my_doubly_linked_list = DoublyLinkedList(7)
