@@ -164,6 +164,36 @@ class DoublyLinkedList:
         # return false when temp is None
         return False
 
+    # insert method
+    def insert(self, index, value):
+        # cannot insert before index 0 (start) or out of range
+        # check on the index
+        if index < 0 or index > self.length:
+            return False
+        # insert at the start of DLL is prepend
+        if index == 0:
+            return self.prepend(value)
+        # insert at end of DLL is append
+        if index == self.length:
+            return self.append(value)
+        # for the insertion in the middle
+        new_node = Node(value)
+        # setup before and after for insertion
+        # use get method to get the before value for insertion
+        # use the .next method to get the after node (O(1) vs O(n) if you use get for after)
+        before = self.get(index - 1)
+        after = before.next
+        # point back the arrows on the new_node back to the original DLL
+        new_node.prev = before
+        new_node.next = after
+        # point the before and after node to the new_node
+        before.next = new_node
+        after.prev = new_node
+
+        # add length of DLL by 1 after insertion
+        self.length += 1
+        return True
+
 
 my_doubly_linked_list = DoublyLinkedList(7)
 # my_doubly_linked_list.print_list()
@@ -247,3 +277,12 @@ print("The node at index 1 is {}".format(
     my_doubly_linked_list_set.get(1).value))  # 100
 
 print("-------------------------------------------")
+# insert(index, value) method
+# setup DLL with nodes
+my_doubly_linked_list_insert = DoublyLinkedList(1)
+my_doubly_linked_list_insert.append(3)
+# print initial DLL
+print(my_doubly_linked_list_insert.print_list())  # 1 3 None
+# invoke insert method at index 1 (2nd element)
+my_doubly_linked_list_insert.insert(1, 2)
+print(my_doubly_linked_list_insert.print_list())  # 1 2 3 None
