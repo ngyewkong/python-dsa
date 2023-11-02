@@ -194,17 +194,42 @@ class DoublyLinkedList:
         self.length += 1
         return True
 
+    # remove method
+    def remove(self, index):
+        # base case - cannot remove out of range
+        if (index >= self.length or index < 0):
+            return None
+        # reuse pop & pop_first methods for removing first and last elements
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop()
+        # remove elements in the middle
+        # set up temp - use one variable to remove middle elements method
+        # instead of using before and after variables
+        temp = self.get(index)
+        temp.next.prev = temp.prev
+        temp.prev.next = temp.next
+        # remove the pointer of temp.prev and temp.next
+        temp.next = None
+        temp.prev = None
+
+        # minus length of DLL
+        self.length -= 1
+        # return the removed node
+        return temp
+
 
 my_doubly_linked_list = DoublyLinkedList(7)
 # my_doubly_linked_list.print_list()
 print(my_doubly_linked_list.print_list())  # 7 None
 
-print("-------------------------------------------")
+print("----- append -----")
 # append
 my_doubly_linked_list.append(2)
 print(my_doubly_linked_list.print_list())  # 7 2 None
 
-print("-------------------------------------------")
+print("----- pop -----")
 # pop - 7 <-> 2 <-> None
 # 2 is being popped
 print("{} is being popped".format(my_doubly_linked_list.pop().value))
@@ -216,7 +241,7 @@ print(my_doubly_linked_list.print_list())  # None
 print("{} is being popped".format(my_doubly_linked_list.pop()))
 print(my_doubly_linked_list.print_list())  # None
 
-print("-------------------------------------------")
+print("----- prepend -----")
 # prepend
 # setting up Doubly LL with 2 items
 my_doubly_linked_list.append(2)
@@ -226,7 +251,7 @@ print(my_doubly_linked_list.print_list())  # 2 3 None
 my_doubly_linked_list.prepend(1)
 print(my_doubly_linked_list.print_list())  # 1 2 3 None
 
-print("-------------------------------------------")
+print("----- pop_first -----")
 # pop_first
 # setting up Doubly LL with 2 items
 my_doubly_linked_list_popfirst = DoublyLinkedList(2)
@@ -247,7 +272,7 @@ print("{} is being popped first".format(
     my_doubly_linked_list_popfirst.pop_first()))
 print(my_doubly_linked_list_popfirst.print_list())  # None
 
-print("-------------------------------------------")
+print("----- get -----")
 # get(index)
 # setup DLL with nodes 2, -3, 5, 1
 my_doubly_linked_list_get = DoublyLinkedList(2)
@@ -260,7 +285,7 @@ print("The node at index 0 is {}".format(
 print("The node at index 2 is {}".format(
     my_doubly_linked_list_get.get(2).value))  # 5
 
-print("-------------------------------------------")
+print("----- set -----")
 # set(index)
 # setup DLL with nodes
 my_doubly_linked_list_set = DoublyLinkedList(2)
@@ -276,7 +301,7 @@ my_doubly_linked_list_set.set_value(1, 100)
 print("The node at index 1 is {}".format(
     my_doubly_linked_list_set.get(1).value))  # 100
 
-print("-------------------------------------------")
+print("----- insert -----")
 # insert(index, value) method
 # setup DLL with nodes
 my_doubly_linked_list_insert = DoublyLinkedList(1)
@@ -286,3 +311,16 @@ print(my_doubly_linked_list_insert.print_list())  # 1 3 None
 # invoke insert method at index 1 (2nd element)
 my_doubly_linked_list_insert.insert(1, 2)
 print(my_doubly_linked_list_insert.print_list())  # 1 2 3 None
+
+print("----- remove -----")
+# remove(index)
+# setup DLL with nodes 0 1 2
+my_doubly_linked_list_remove = DoublyLinkedList(0)
+my_doubly_linked_list_remove.append(1)
+my_doubly_linked_list_remove.append(2)
+print(my_doubly_linked_list_remove.print_list())  # 0 1 2 None
+# remove element at indec 1
+print("The node removed at index 1 is {}".format(
+    my_doubly_linked_list_remove.remove(1).value
+))
+print(my_doubly_linked_list_remove.print_list())  # 0 2 None
