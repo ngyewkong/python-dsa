@@ -21,3 +21,21 @@
 # insert LinkedList is btr [O(1) vs O(log n)]
 # so if they asked for fast insertion and retrieval is not frequent or need to ensure all data are captured
 # LinkedList is btr in this case
+
+class Node:
+    def __init__(self, value) -> None:
+        self.value = value
+        self.left = None
+        self.right = None
+
+
+class BinarySearchTree:
+    def __init__(self) -> None:
+        # initialize an empty BST
+        self.root = None
+
+
+# sample setup for BST
+print("----- test BST setup class -----")
+my_tree = BinarySearchTree()
+print(my_tree.root)
