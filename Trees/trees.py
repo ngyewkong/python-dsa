@@ -70,6 +70,32 @@ class BinarySearchTree:
                 # shift the temp to next layer to continue traversing
                 temp = temp.right
 
+    # contains method to find a particular value
+    def contains(self, value):
+        # base case if root is None -> BST is empty return False and exit
+        if self.root is None:
+            return False
+        # need a variable to traverse down the tree
+        temp = self.root
+        # if temp is not None continue loop
+        while (temp is not None):
+            # lookup value smaller than temp go left
+            if (value < temp.value):
+                # traverse next layer
+                temp = temp.left
+            # # loopup value greater than temp go right
+            elif (value > temp.value):
+                # traverse the right side
+                temp = temp.right
+            # if temp is not None and it is traversing till the end
+            # loopup node is in the tree
+            # return True
+            else:
+                return True
+        # when temp is None after Traversal -> end of tree still no match
+        # return False
+        return False
+
 
 # sample setup for BST
 print("----- test BST setup class -----")
@@ -85,3 +111,16 @@ my_tree.insert(1)
 print("The root node value is {}".format(my_tree.root.value))  # 2
 print("The left child node value is {}".format(my_tree.root.left.value))  # 1
 print("The right child node value is {}".format(my_tree.root.right.value))  # 3
+
+# contains
+print("----- contains -----")
+my_tree.insert(76)
+my_tree.insert(52)
+my_tree.insert(82)
+
+print("Does node 52 exists in the BST? Ans: {}".format(
+    my_tree.contains(52)))  # True
+print("Does node 82 exists in the BST? Ans: {}".format(
+    my_tree.contains(82)))  # True
+print("Does node 10 exists in the BST? Ans: {}".format(
+    my_tree.contains(10)))  # False
