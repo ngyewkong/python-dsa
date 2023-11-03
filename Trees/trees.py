@@ -34,8 +34,54 @@ class BinarySearchTree:
         # initialize an empty BST
         self.root = None
 
+    # insert method
+    def insert(self, value):
+        new_node = Node(value)
+        # check for base case if BST root is empty
+        if self.root == None:
+            self.root = new_node
+            # return statement needed as we do not need to run the later parts of code
+            # since an insertion has happened
+            return True
+        # setup temp variable for the rest of the cases
+        temp = self.root
+        # while loop
+        while (True):
+            # edge cases
+            # when new node is the same value as any existing node return False
+            # BST cannot have duplicated node values
+            if new_node.value == temp.value:
+                return False
+            # the logic for smaller value go left bigger value go right of parent node
+            if new_node.value < temp.value:
+                # check the next node after temp on the left
+                if temp.left is None:
+                    temp.left = new_node
+                    return True
+                # if temp.left the next layer has a node
+                # shift the temp to next layer to continue traversing
+                temp = temp.left
+            else:
+                # inserting right for greater value
+                if temp.right is None:
+                    temp.right = new_node
+                    return True
+                # if there is a node after temp
+                # shift the temp to next layer to continue traversing
+                temp = temp.right
+
 
 # sample setup for BST
 print("----- test BST setup class -----")
 my_tree = BinarySearchTree()
 print(my_tree.root)
+
+# insert
+print("----- insert -----")
+# setup BST with 2 as root node 1 and 3 as children node
+my_tree.insert(2)
+my_tree.insert(3)
+my_tree.insert(1)
+print("The root node value is {}".format(my_tree.root.value))  # 2
+print("The left child node value is {}".format(my_tree.root.left.value))  # 1
+print("The right child node value is {}".format(my_tree.root.right.value))  # 3
