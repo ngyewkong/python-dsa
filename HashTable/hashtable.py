@@ -62,6 +62,21 @@ class HashTable:
         # cannot find said key return None
         return None
 
+    # keys method
+    def keys(self):
+        # set a list to hold the keys
+        all_keys = []
+        # for loop to iterate through the data_map
+        # nested loop to loop through the inner list to find the keys
+        for i in range(len(self.data_map)):
+            # check if the inner list in each address space is not None then iterate
+            if self.data_map[i] is not None:
+                for j in range(len(self.data_map[i])):
+                    # append the key the 0th element to the all keys list
+                    all_keys.append(self.data_map[i][j][0])
+        # return all keys list
+        return all_keys
+
 
 # sample setup for HashTable
 print("----- test HashTable setup class -----")
@@ -83,3 +98,8 @@ print("The qty of washers is {}".format(
     my_hash_table.get_item('washers')))  # 100
 print("The qty of screws is {}".format(
     my_hash_table.get_item('screws')))  # None
+
+# key
+print("----- keys -----")
+print("The keys in the Hash Table are {}".format(
+    my_hash_table.keys()))  # ['bolts', 'washers', 'lumber']
