@@ -72,9 +72,11 @@ class BinarySearchTree:
 
     # contains method to find a particular value
     def contains(self, value):
-        # base case if root is None -> BST is empty return False and exit
-        if self.root is None:
-            return False
+        # this base case is not needed as teh while loop will not invoke as temp is None
+        # return False also
+        # # base case if root is None -> BST is empty return False and exit
+        # if self.root is None:
+        #     return False
         # need a variable to traverse down the tree
         temp = self.root
         # if temp is not None continue loop
