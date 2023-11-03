@@ -103,3 +103,63 @@ print("The qty of screws is {}".format(
 print("----- keys -----")
 print("The keys in the Hash Table are {}".format(
     my_hash_table.keys()))  # ['bolts', 'washers', 'lumber']
+
+# Big O
+# hash function for each key is O(1)
+# set_item is also O(1)
+# get_item is also O(1) to get the address one more step to get the item
+# worst case is O(n) if all items are being stored at the same address
+# assumption is distributed (good distribution) amd larger address space
+# collisions are rare
+# dictionary in python the impl
+# to place a key-value pair O(1)
+# to lookup by key O(1) lookup by value is not O(1)
+
+# Interview Qn (Compare two lists and find the common match)
+# 1st Approach (Naive) -> not recommended for interview
+# 1 nested for loop to iterate both lists and compare
+# O(n^2) not efficient
+
+
+def item_in_common(list1, list2):
+    for i in list1:
+        for j in list2:
+            if (i == j):
+                return True
+    # for no match return False
+    return False
+
+
+list1 = [1, 3, 5]
+list2 = [2, 4, 5]
+
+# Interview Qn - Naive Approach
+print("----- Nested for loops to compare matching elements in 2 lists -> Naive Approach -----")
+print(item_in_common(list1, list2))  # True as 5 is common
+
+# Efficient Approach is to use dictionary/hashtable
+# loop through the first list and store it dictionary key-value pair (element: boolean)
+# search by key to find match
+# have to go through each list once -> O(2n) -> O(n) which more efficient than O(n^2)
+
+
+def item_in_common_dict(list1, list2):
+    # create dict
+    my_dict = {}
+    # iterate through the first list and add to dict
+    for i in list1:
+        # add the element as key with value True
+        my_dict[i] = True
+
+    # iterate through the second list O(n) and use it to get on dict O(1)
+    for j in list2:
+        if j in my_dict:
+            return True
+
+    # return False for no matches
+    return False
+
+
+# Interview Qn - Efficient Approach
+print("----- Dictionary to compare matching elements in 2 lists -> Efficient Approach -----")
+print(item_in_common_dict(list1, list2))  # True
