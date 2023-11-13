@@ -29,3 +29,21 @@
 #   'D': ['C', 'E'],
 #   'E': ['D', 'A']
 # }
+
+# Big(O) of Graph
+# Space Complexitty
+# Adjacency Matrix vs Adjacency List impl
+# Matrix: need to store irrelevant details (other vertices that are not connected)
+# List: only store the adjacent vertices
+# adding a vertex
+# Matrix: O(|V|^2)
+# List: O(1) dictionary
+# adding a edge
+# Matrix: O(1)
+# List: O(1)
+# removing edge
+# Matrix: O(1)
+# List: O(|E|) need to iterate through the list and find the values to remove
+# removing vertex
+# Matrix: O(|V|^2)
+# List: O(|V| + |E|)
