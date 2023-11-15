@@ -65,11 +65,33 @@ class Graph:
             return True
         return False
 
+    # add edge method
+    # eg.
+    # {
+    #   1: [2],
+    #   2: [1]
+    # }
+    def add_edge(self, vertex1, vertex2):
+        # append the list of the key or vertex1 with the value of vertex2
+        # only want to append if both vertices are present in the adj list
+        if vertex1 in self.adj_list.keys() and vertex2 in self.adj_list.keys():
+            self.adj_list[vertex1].append(vertex2)
+            self.adj_list[vertex2].append(vertex1)
+            return True
+        return False
+
 
 # sample setup for Graph
 print("----- test Graph setup class -----")
 my_graph = Graph()
 
-my_graph.add_vertex('A')
+print("----- add_vertex method -----")
+my_graph.add_vertex(1)
+my_graph.add_vertex(2)
 
-my_graph.print_graph()
+my_graph.print_graph()  # 1: [] 2: []
+
+print("----- add_edge method -----")
+my_graph.add_edge(1, 2)
+
+my_graph.print_graph()  # 1: [2] 2: [1]
