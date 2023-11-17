@@ -96,6 +96,24 @@ class Graph:
             return True
         return False
 
+    # remove vertex method
+    # bidirectional connections have efficiency
+    # if D has an edge with another vertex A
+    # this implies the other vertex has an edge connection with D
+    def remove_vertex(self, vertex):
+        # check in vertex exist in the adj list
+        if vertex in self.adj_list.keys():
+            # if vertex exist in adj list -> loop through the list
+            for other_vertex in self.adj_list[vertex]:
+                # go through the list of edges associated with vertex
+                # remove the edge it has with the vertex that we are removing out of Graph
+                self.adj_list[other_vertex].remove(vertex)
+            # after removing all the related connection vertices
+            # del the vertex key from the adj list
+            del self.adj_list[vertex]
+            return True
+        return False
+
 
 # sample setup for Graph
 print("----- test Graph setup class -----")
@@ -136,3 +154,26 @@ my_graph_remove_edge.print_graph()  # A: ['C'] B: ['C'] C: ['B', 'A']
 # ValueError (x not in list) as edge case was not handled in remove_edge method yet
 my_graph_remove_edge.remove_edge('A', 'D')
 my_graph_remove_edge.print_graph()  # A: ['C'] B: ['C'] C: ['B', 'A'] D: []
+
+# remove vertex
+print("----- remove_vertex method -----")
+my_graph_remove_vertex = Graph()
+my_graph_remove_vertex.add_vertex('A')
+my_graph_remove_vertex.add_vertex('B')
+my_graph_remove_vertex.add_vertex('C')
+my_graph_remove_vertex.add_vertex('D')
+
+my_graph_remove_vertex.add_edge('A', 'B')
+my_graph_remove_vertex.add_edge('A', 'C')
+my_graph_remove_vertex.add_edge('A', 'D')
+my_graph_remove_vertex.add_edge('B', 'D')
+my_graph_remove_vertex.add_edge('C', 'D')
+
+# A : ['B', 'C', 'D'] B : ['A', 'D'] C : ['A', 'D'] D : ['A', 'B', 'C']
+my_graph_remove_vertex.print_graph()
+
+# removing vertex
+print("----- removing vertex -----")
+my_graph_remove_vertex.remove_vertex('D')
+
+my_graph_remove_vertex.print_graph()  # A: ['B', 'C'] B: ['A'] C: ['A']
