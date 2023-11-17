@@ -80,6 +80,22 @@ class Graph:
             return True
         return False
 
+    # remove edge method
+    def remove_edge(self, vertex1, vertex2):
+        # check if both the vertices exist as keys in adj list
+        if vertex1 in self.adj_list.keys() and vertex2 in self.adj_list.keys():
+            # need to handle edge case of vertices that are not connected by edges
+            # this means the vertices will not have each other as keys in adj list
+            # handle by try-except
+            try:
+                self.adj_list[vertex1].remove(vertex2)
+                self.adj_list[vertex2].remove(vertex1)
+            except ValueError:
+                # if ValueError happened pass and continue on
+                pass
+            return True
+        return False
+
 
 # sample setup for Graph
 print("----- test Graph setup class -----")
@@ -95,3 +111,28 @@ print("----- add_edge method -----")
 my_graph.add_edge(1, 2)
 
 my_graph.print_graph()  # 1: [2] 2: [1]
+
+print("----- remove_edge method -----")
+my_graph_remove_edge = Graph()
+
+# set up (adding vertices and edges)
+my_graph_remove_edge.add_vertex('A')
+my_graph_remove_edge.add_vertex('B')
+my_graph_remove_edge.add_vertex('C')
+my_graph_remove_edge.add_vertex('D')
+
+my_graph_remove_edge.add_edge('A', 'B')
+my_graph_remove_edge.add_edge('B', 'C')
+my_graph_remove_edge.add_edge('C', 'A')
+
+my_graph_remove_edge.print_graph()  # A: ['B', 'C'] B: ['A', 'C'] C: ['B', 'A']
+
+# remove edge
+print("----- removing edge -----")
+
+my_graph_remove_edge.remove_edge('A', 'B')
+my_graph_remove_edge.print_graph()  # A: ['C'] B: ['C'] C: ['B', 'A']
+
+# ValueError (x not in list) as edge case was not handled in remove_edge method yet
+my_graph_remove_edge.remove_edge('A', 'D')
+my_graph_remove_edge.print_graph()  # A: ['C'] B: ['C'] C: ['B', 'A'] D: []
